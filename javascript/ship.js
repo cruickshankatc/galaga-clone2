@@ -1,3 +1,9 @@
+/**
+* Handles everything regarding the ship's design, 
+* coordinates and movements. createShip() is then evoked
+* in setup.js.
+*/
+
 function createShip(x, y) {
     return {
     x: x,
