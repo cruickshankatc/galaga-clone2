@@ -1,6 +1,8 @@
 /**
 * Creates an array called theBugs[] and then fills that
 * array with 40 empty objects
+*
+* Also, gives each bug a property called "goingDown"
 */
 let theBugs = [];
 
@@ -8,6 +10,32 @@ for (i = 0; i < 40; i++) {
   theBugs.push({});
 }
 
+for (i = 0; i < theBugs.length; i++) {
+  theBugs[i].x3 = 0;
+  theBugs[i].goingDown = false;
+  theBugs[i].goingUp = false;
+}
+
+/**
+* Deals with the fly down animations for the bugs
+*/
+for (let i = 0; i < theBugs.length; i++) {
+  theBugs[i].flyingDown = function() {
+    if (theBugs[i].goingDown) {
+      this.y += 5.6;
+    } else if (!theBugs[i].goingDown && theBugs[i].goingUp) {
+      this.y -= 5.6;
+      }
+    }
+  
+  
+  // theBugs[i].flyingUp = function() {
+  //   if (theBugs[i].goingUp) {
+  //     this.y -= 7.6;
+  //     console.log("yes")
+  //   }
+  // }
+}
 
 /**
 * Simple Boolean that regulates whether the missile is

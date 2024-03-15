@@ -1,4 +1,3 @@
-theBugs[37].name = "testGuy";
 let firing = 320; 
 
 function draw() {
@@ -23,8 +22,7 @@ function draw() {
   } else if (!spacePressed) {
     firing = missile.y;
   }
-  
-  /**
+ /**
   * Simply console logs the length of theBugs[] for         * testing purposes. On collision with objects from         * theBugs[] and object in the array is removed.
   */
   if (firing <= 0) {
@@ -54,6 +52,8 @@ function draw() {
       bug.color = "#7D00FF"
       spacePressed = false;
     } else {
+      theBugs[index].goingDown = false;
+      console.log(theBugs[index].goingDown);
       theBugs.splice(index, 1);
       spacePressed = false;
       console.log(theBugs.length);
@@ -91,7 +91,12 @@ function draw() {
   theBugs.forEach((bug, i) => {
     fill(bug.color);
     ellipseMode(CENTER);
-    ellipse(bug.x2, bug.y, 25);
+    
+    if (bug.goingDown === false) {
+      ellipse(bug.x2, bug.y, 25);
+    } else {
+      ellipse(bug.x3, bug.y, 25);
+    }
   });
   
 
@@ -107,9 +112,16 @@ function draw() {
     text("Swag!", width/2, height/2);
   }
   
-  if (goingDown) {
-    let testGuyBug = theBugs.find(bug => bug.name ===           "testGuy");
-    testGuyBug.y++;
+  for (i = 0; i < theBugs.length; i++) {
+    theBugs[i].flyingDown();
   }
   
+   for (i = 0; i < theBugs.length; i++) {
+    if (theBugs[i].y >= 400) {
+      chongu(theBugs[i]);
+    }
+  } 
+  
 }
+
+setInterval(chimmy, 1000);
