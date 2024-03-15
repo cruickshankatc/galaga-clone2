@@ -1,3 +1,4 @@
+theBugs[37].name = "testGuy";
 let firing = 320; 
 
 function draw() {
@@ -26,13 +27,16 @@ function draw() {
   /**
   * Simply console logs the length of theBugs[] for         * testing purposes. On collision with objects from         * theBugs[] and object in the array is removed.
   */
-  if (firing === 0) {
-    console.log(theBugs.length);
+  if (firing <= 0) {
+    spacePressed = false;
   } 
   
   /**
   * Deals with collisions with the missile and items in   
-  * theBugs[] to ensure that when the missile's             * coordinates match a bug that bug is spliced.
+  * theBugs[] to ensure that when the missile's               * coordinates match a bug that bug is spliced.
+  * 
+  * When a green bug is hit, they are not spliced. Instead,
+  * their color simply changes to purple.
   *
   * Any time a missile hits a bug the position of missile 
   * resets.
@@ -44,9 +48,15 @@ function draw() {
     firing2 <= bug.x2 + 12.5 && 
     firing >= bug.y - 12.5 && 
     firing <= bug.y + 12.5
-    ) {
+    ) 
+    
+    if (bug.color === "#00FF00") {
+      bug.color = "#7D00FF"
+      spacePressed = false;
+    } else {
       theBugs.splice(index, 1);
       spacePressed = false;
+      console.log(theBugs.length);
     }
   });
   
@@ -79,21 +89,27 @@ function draw() {
   * colors but is still nonetheless drawn.
   */
   theBugs.forEach((bug, i) => {
-    if (i < 4) {
-      fill(0, 255, 0);
-    } else if (i < 20) {
-      fill(255, 0, 0);
-    } else {
-      fill(0, 0, 255);
-    }
-    
+    fill(bug.color);
     ellipseMode(CENTER);
     ellipse(bug.x2, bug.y, 25);
   });
   
+
   /**
-  * Creates the random lower bug for testing purposes
+  * Text appears on screen to let the player know that 
+  * they've won.
   */
-   ellipse(200, 225, shipSize);
+  
+  if (theBugs.length === 0) {
+    textSize(32);
+    textAlign(CENTER, CENTER);
+    fill(255); 
+    text("Swag!", width/2, height/2);
+  }
+  
+  if (goingDown) {
+    let testGuyBug = theBugs.find(bug => bug.name ===           "testGuy");
+    testGuyBug.y++;
+  }
   
 }

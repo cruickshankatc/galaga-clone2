@@ -4,13 +4,10 @@
 */
 let theBugs = [];
 
-let greenBugs;
-let redBugs;
-let blueBugs;
-
 for (i = 0; i < 40; i++) {
   theBugs.push({});
 }
+
 
 /**
 * Simple Boolean that regulates whether the missile is
@@ -23,12 +20,6 @@ let spacePressed = false;
 * attributes within "createShip()" applied to it
 */
 let ship;
-
-/**
-* Regulates the size of the random lower ship. For testing 
-* purposes only.
-*/
-let shipSize = 25;
 
 /**
 * Unclear
@@ -45,27 +36,39 @@ let direction = 1;
 /**
 * Handles the creation of bugs to assure the bugs are
 * created in separate rows.
+*
+* Assigns a color to each bug item in the array.
 */
-  for (let i = 0; i < theBugs.length; i++) {
-    if (i < 4) {
-      theBugs[i].x = 125 + i * 25;
-      theBugs[i].x2 = theBugs[i].x;
-      theBugs[i].y = 50;
-    } else if (i < 12) {
-      theBugs[i].x = -25 + i * 25;
-      theBugs[i].x2 = theBugs[i].x;
-      theBugs[i].y = 75;
-    } else if (i < 20) {
-      theBugs[i].x = -225 + i * 25;
-      theBugs[i].x2 = theBugs[i].x;
-      theBugs[i].y = 100;
-    } else if (i < 30) {
-      theBugs[i].x = -450 + i * 25;
-      theBugs[i].x2 = theBugs[i].x;
-      theBugs[i].y = 125;      
-    } else if (i < 40) {
-      theBugs[i].x = -700 + i * 25;
-      theBugs[i].x2 = theBugs[i].x;
-      theBugs[i].y = 150;      
-    }
+for (let i = 0; i < theBugs.length; i++) {
+  if (i < 4) {
+    theBugs[i].x = 125 + i * 25;
+    theBugs[i].x2 = theBugs[i].x;
+    theBugs[i].y = 50;
+  } else if (i < 12) {
+    theBugs[i].x = -25 + i * 25;
+    theBugs[i].x2 = theBugs[i].x;
+    theBugs[i].y = 75;
+  } else if (i < 20) {
+    theBugs[i].x = -225 + i * 25;
+    theBugs[i].x2 = theBugs[i].x;
+    theBugs[i].y = 100;
+  } else if (i < 30) {
+    theBugs[i].x = -450 + i * 25;
+    theBugs[i].x2 = theBugs[i].x;
+    theBugs[i].y = 125;      
+  } else if (i < 40) {
+    theBugs[i].x = -700 + i * 25;
+    theBugs[i].x2 = theBugs[i].x;
+    theBugs[i].y = 150;      
   }
+}
+
+for (let i = 0; i < theBugs.length; i++) {
+  if (i < 4) {
+    theBugs[i].color = "#00FF00"; // Green
+  } else if (i < 20) {
+    theBugs[i].color = "#FF0000"; // Red
+  } else {
+    theBugs[i].color = "#0000FF"; // Blue
+  }
+}
