@@ -12,6 +12,7 @@ for (i = 0; i < 40; i++) {
 
 for (i = 0; i < theBugs.length; i++) {
   theBugs[i].x3 = 0;
+  theBugs[i].x4 = 0; 
   theBugs[i].goingDown = false;
   theBugs[i].goingUp = false;
 }
@@ -21,10 +22,11 @@ for (i = 0; i < theBugs.length; i++) {
 */
 for (let i = 0; i < theBugs.length; i++) {
   theBugs[i].flyingDown = function() {
-    if (theBugs[i].goingDown) {
-      this.y += 5.6;
-    } else if (!theBugs[i].goingDown && theBugs[i].goingUp) {
-      this.y -= 5.6;
+    if (this.goingDown) {
+      this.y2 += 5.6;
+    } else if (!this.goingDown && this.goingUp)   {
+      this.y2 -= 1.6;
+      this.x4 += 1;
       }
     }
   
@@ -99,4 +101,8 @@ for (let i = 0; i < theBugs.length; i++) {
   } else {
     theBugs[i].color = "#0000FF"; // Blue
   }
+}
+
+for (i = 0; i < theBugs.length; i++) {
+  theBugs[i].y2 = theBugs[i].y;
 }

@@ -92,10 +92,12 @@ function draw() {
     fill(bug.color);
     ellipseMode(CENTER);
     
-    if (bug.goingDown === false) {
+    if (bug.goingDown === false && bug.goingUp === false) {
       ellipse(bug.x2, bug.y, 25);
-    } else {
-      ellipse(bug.x3, bug.y, 25);
+    } else if (bug.goingDown === true && bug.goingUp === false) {
+      ellipse(bug.x3, bug.y2, 25);
+    } else if (bug.goingDown === false && bug.goingUp ===  true) {
+      ellipse(bug.x4, bug.y2, 25);
     }
   });
   
@@ -117,11 +119,35 @@ function draw() {
   }
   
    for (i = 0; i < theBugs.length; i++) {
-    if (theBugs[i].y >= 400) {
+    if (theBugs[i].y2 >= 400) {
       chongu(theBugs[i]);
+    } else if (theBugs[i].x4 >= theBugs[i].x2 && theBugs[i].y2 <= 5) {
+      chase(theBugs[i]);
     }
-  } 
-  
+    
+     
+   } 
 }
 
-setInterval(chimmy, 1000);
+function johnson() {
+  console.log(theBugs.length);
+}
+
+setInterval(johnson, 3000);
+
+let intervalID;
+
+function startOrStopInterval() {
+    let anyBugGoingDownOrUp = theBugs.some(bug => !bug.goingDown || !bug.goingUp);
+    if (anyBugGoingDownOrUp) {
+        if (!intervalID) {
+            intervalID = setInterval(chimmy, 1000);
+        }
+    } else {
+        clearInterval(intervalID);
+        intervalID = undefined;
+    }
+}
+
+// Call the function initially
+startOrStopInterval();
